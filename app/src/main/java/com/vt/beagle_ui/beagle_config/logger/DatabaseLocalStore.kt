@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.vt.beagle_ui.beagle.logger
+package com.vt.beagle_ui.beagle_config.logger
 
 import android.content.ContentValues
 import android.content.Context

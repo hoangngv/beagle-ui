@@ -1,7 +1,7 @@
 package com.vt.beagle_ui.application
 
 import android.app.Application
-import com.vt.beagle_ui.beagle.BeagleSetup
+import com.vt.beagle_ui.beagle_config.BeagleSetup
 
 class MyApplication: Application() {
 

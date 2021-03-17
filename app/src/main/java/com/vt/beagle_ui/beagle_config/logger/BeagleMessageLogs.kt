@@ -14,27 +14,15 @@
  * limitations under the License.
  */
 
-package com.vt.beagle_ui.beagle.logger
+package com.vt.beagle_ui.beagle_config.logger
 
-import br.com.zup.beagle.android.store.LocalStore
+import com.vt.beagle_ui.beagle_config.cache.BeagleLoggerDefault
 
-internal object MemoryLocalStore : LocalStore {
+internal object BeagleMessageLogs {
 
-    private val cache = mutableMapOf<String, String>()
-
-    override fun save(key: String, value: String) {
-        cache[key] = value
-    }
-
-    override fun restore(key: String): String? {
-        return cache[key]
-    }
-
-    override fun delete(key: String) {
-        cache.remove(key)
-    }
-
-    override fun getAll(): Map<String, String> {
-        return cache.toMap()
+    fun logDataNotInsertedOnDatabase(key: String, value: String) {
+        BeagleLoggerDefault().warning(
+            "Error when trying to insert key=$key with value=$value on Beagle default database."
+        )
     }
 }

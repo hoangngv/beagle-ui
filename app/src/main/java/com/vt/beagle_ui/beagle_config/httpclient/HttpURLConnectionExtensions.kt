@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.vt.beagle_ui.beagle.httpclient
+package com.vt.beagle_ui.beagle_config.httpclient
 
 import java.lang.Exception
 import java.net.HttpURLConnection

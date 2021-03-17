@@ -14,31 +14,27 @@
  * limitations under the License.
  */
 
-package com.vt.beagle_ui.beagle.cache
+package com.vt.beagle_ui.beagle_config.logger
 
-import android.util.Log
-import br.com.zup.beagle.android.annotation.BeagleComponent
-import br.com.zup.beagle.android.logger.BeagleLogger
+import br.com.zup.beagle.android.store.LocalStore
 
-private const val BEAGLE_TAG = "BeagleSDK"
+internal object MemoryLocalStore : LocalStore {
 
-@BeagleComponent
-class BeagleLoggerDefault : BeagleLogger {
+    private val cache = mutableMapOf<String, String>()
 
-    override fun warning(message: String) {
-        Log.w(BEAGLE_TAG, message)
+    override fun save(key: String, value: String) {
+        cache[key] = value
     }
 
-    override fun error(message: String) {
-        Log.e(BEAGLE_TAG, message)
+    override fun restore(key: String): String? {
+        return cache[key]
     }
 
-    override fun error(message: String, throwable: Throwable) {
-        Log.e(BEAGLE_TAG, message, throwable)
+    override fun delete(key: String) {
+        cache.remove(key)
     }
 
-    override fun info(message: String) {
-        Log.i(BEAGLE_TAG, message)
+    override fun getAll(): Map<String, String> {
+        return cache.toMap()
     }
-
 }

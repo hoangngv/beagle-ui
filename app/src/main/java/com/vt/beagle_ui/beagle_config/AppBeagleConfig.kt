@@ -1,4 +1,4 @@
-package com.vt.beagle_ui.beagle
+package com.vt.beagle_ui.beagle_config
 
 import br.com.zup.beagle.android.annotation.BeagleComponent
 import br.com.zup.beagle.android.setup.BeagleConfig
