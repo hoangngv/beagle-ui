@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">beagle-ui</string>
+
+    <string name="personal">Cá nhân</string>
+    <string name="forgot_password">Quên mật khẩu</string>
+    <string name="account_info">Thông tin tài khoản</string>
+
+    <string name="press_again_to_exit">Chạm lần nữa để thoát</string>
 </resources>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@color/colorGreen"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:focusable="true"
+        android:clickable="true"
+        app:tint="@color/colorWhite"
+        android:id="@+id/ivBack"
+        android:background="?selectableItemBackgroundBorderless"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:padding="@dimen/_8sdp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_back"
+        android:layout_width="@dimen/_28sdp"
+        android:layout_height="@dimen/_28sdp"/>
+
+    <TextView
+        android:gravity="center_horizontal"
+        android:layout_toEndOf="@+id/ivBack"
+        android:layout_toStartOf="@+id/ivRight"
+        android:layout_centerInParent="true"
+        android:id="@+id/tvTitleToolbar"
+        android:padding="@dimen/_2sdp"
+        style="@style/BigBoldTextWhite"
+        android:text="@string/personal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:visibility="invisible"
+        android:layout_marginEnd="@dimen/_4sdp"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/ivRight"
+        android:background="?selectableItemBackgroundBorderless"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:padding="@dimen/_5sdp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_back"
+        android:layout_width="@dimen/_28sdp"
+        android:layout_height="@dimen/_28sdp"/>
+
+</RelativeLayout>

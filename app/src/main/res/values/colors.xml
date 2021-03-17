@@ -9,4 +9,7 @@
     <color name="colorGray">#6F6F6F</color>
     <color name="colorIti">#2D3748</color>
     <color name="colorDarkBlue">#272E39</color>
+
+    <color name="colorGreen">#0F8E70</color>
+    <color name="colorTextMain">#353739</color>
 </resources>

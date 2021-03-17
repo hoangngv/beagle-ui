@@ -31,4 +31,9 @@ class AppBeagleActivity : BeagleActivity() {
             progress_bar.visibility = if (state.loading) View.VISIBLE else View.GONE
         }
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
 }

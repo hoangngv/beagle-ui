@@ -19,6 +19,7 @@ class AppDesignSystem: DesignSystem() {
     override fun buttonStyle(id: String): Int? {
         return when(id) {
             "button" -> R.style.DesignSystem_Button_Default
+            "ButtonRightArrow" -> R.style.DesignSystem_Button_RightArrow
             else -> R.style.DesignSystem_Button_Default
         }
     }
