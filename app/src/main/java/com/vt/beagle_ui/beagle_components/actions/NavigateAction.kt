@@ -10,7 +10,7 @@ import br.com.zup.beagle.annotation.RegisterAction
 import com.vt.beagle_ui.ui.AppBeagleActivity
 
 @RegisterAction
-class NavigateAction(val destination : String) : Action {
+class NavigateAction(private val destination : String) : Action {
     override fun execute(rootView: RootView, origin: View) {
         val intent = rootView.getContext().newServerDrivenIntent<AppBeagleActivity>(ScreenRequest(destination))
         startActivity(rootView.getContext(), intent, null)

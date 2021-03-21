@@ -90,4 +90,9 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="NormalText">
+        <item name="android:textSize">@dimen/size_text_normal</item>
+        <item name="android:textColor">@color/colorTextMain</item>
+    </style>
+
 </resources>

@@ -38,8 +38,6 @@ import com.vt.beagle_ui.extensions.toast
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-
-    private var backPressedOnce = false
     private val binding: ActivityMainBinding by lazy {ActivityMainBinding.inflate(layoutInflater)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,23 +82,6 @@ class MainActivity : AppCompatActivity() {
             baseContext.applicationContext.createConfigurationContext(config)
         }
     }
-
-    override fun onBackPressed() {
-        changeStatusBarColor(ContextCompat.getColor(this, R.color.colorGreen))
-
-        if (backPressedOnce) {
-            super.onBackPressed()
-            return
-        }
-
-        this.backPressedOnce = true
-        applicationContext.toast(getString(R.string.press_again_to_exit))
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            backPressedOnce = false
-        }, 2000)
-    }
-
 
     private fun testScreen() = Screen(
         child = Container(

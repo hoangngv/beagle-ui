@@ -8,6 +8,7 @@ import com.vt.beagle_ui.R
 class AppDesignSystem: DesignSystem() {
     override fun textStyle(id: String): Int? {
         return when(id) {
+            "NormalText" -> R.style.NormalText
             "TextStyle" -> R.style.TextStyle
             "TextAccessProfile" -> R.style.TextAccessProfile
             "TextTitleProfile" -> R.style.TextTitleProfile
