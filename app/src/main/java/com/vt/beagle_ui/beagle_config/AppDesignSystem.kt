@@ -43,6 +43,7 @@ class AppDesignSystem: DesignSystem() {
         return when(id) {
             "mobile" -> R.drawable.ic_launcher_foreground
             "right-arrow" -> R.drawable.ic_right_arrow
+            "ic_notification" -> R.drawable.ic_notification
             else -> android.R.drawable.ic_menu_help
         }
     }

@@ -22,7 +22,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun renderServerDrivenUI() {
-        val intent = this.newServerDrivenIntent<AppBeagleActivity>(ScreenRequest("/uiController/personal"))
+        val intent = this.newServerDrivenIntent<AppBeagleActivity>(ScreenRequest("/uiController/home"))
         startActivity(intent)
         finish()
 
