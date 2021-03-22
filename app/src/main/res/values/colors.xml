@@ -12,4 +12,5 @@
 
     <color name="colorGreen">#0F8E70</color>
     <color name="colorTextMain">#353739</color>
+    <color name="colorDivider">#B9B9B9</color>
 </resources>

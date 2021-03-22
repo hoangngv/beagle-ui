@@ -58,9 +58,14 @@
     </style>
 
     <style name="DesignSystem.Toolbar.Center" parent="Widget.AppCompat.Toolbar">
-        <item name="titleTextAppearance">@style/DesignSystem.Toolbar.TextAppearance</item>
-        <item name="backgroundColor">@color/colorWhite</item>
+        <item name="titleTextAppearance">@style/DesignSystem.Toolbar.WhiteTextAppearance</item>
+        <item name="backgroundColor">@color/colorGreen</item>
         <item name="centerTitle">true</item>
+    </style>
+
+    <style name="DesignSystem.Toolbar.WhiteTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="DesignSystem.Toolbar.TextAppearance" parent="TextAppearance.AppCompat">
