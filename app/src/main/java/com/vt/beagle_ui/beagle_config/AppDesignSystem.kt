@@ -47,4 +47,6 @@ class AppDesignSystem: DesignSystem() {
             else -> android.R.drawable.ic_menu_help
         }
     }
+
+    override fun tabViewStyle(id: String): Int? = R.style.DesignSystem_TabView_Default
 }

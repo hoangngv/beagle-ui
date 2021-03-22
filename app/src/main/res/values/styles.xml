@@ -89,6 +89,14 @@
         <item name="android:drawableEnd">@drawable/ic_next</item>
     </style>
 
+    <style name="DesignSystem.TabView.Default" parent="Widget.Design.TabLayout">
+        <item name="tabSelectedTextColor">@color/colorWhite</item>
+        <item name="tabTextColor">@color/colorBlack</item>
+        <item name="tabBackground">@color/colorPrimaryDark</item>
+        <item name="tabIndicatorColor">@color/colorWhite</item>
+        <item name="tabIconTint">@color/selector_icon_color</item>
+    </style>
+
     <style name="BigBoldTextWhite">
         <item name="android:textSize">@dimen/size_text_normal_big</item>
         <item name="android:textColor">@color/colorWhite</item>
