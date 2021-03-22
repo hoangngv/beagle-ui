@@ -6,12 +6,23 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import androidx.core.content.ContextCompat
+import br.com.zup.beagle.android.components.Text
+import br.com.zup.beagle.android.components.page.PageIndicator
+import br.com.zup.beagle.android.components.page.PageView
+import br.com.zup.beagle.android.context.ContextData
+import br.com.zup.beagle.android.context.expressionOf
+import br.com.zup.beagle.android.context.valueOf
 import br.com.zup.beagle.android.utils.loadView
 import br.com.zup.beagle.android.utils.newServerDrivenIntent
 import br.com.zup.beagle.android.utils.renderScreen
+import br.com.zup.beagle.android.utils.toView
 import br.com.zup.beagle.android.view.ScreenRequest
 import br.com.zup.beagle.android.view.ServerDrivenState
 import br.com.zup.beagle.android.view.custom.OnServerStateChanged
+import br.com.zup.beagle.ext.applyFlex
+import br.com.zup.beagle.widget.core.AlignSelf
+import br.com.zup.beagle.widget.core.Flex
+import br.com.zup.beagle.widget.core.TextAlignment
 import com.vt.beagle_ui.R
 import com.vt.beagle_ui.extensions.changeStatusBarColor
 import com.vt.beagle_ui.extensions.toast
@@ -28,46 +39,14 @@ class HomeActivity : AppCompatActivity() {
         renderServerDrivenUI()
     }
 
+    private fun renderDeclarativeUI() {
+        server_driven_container.addView(testPageView().toView(this))
+    }
+
     private fun renderServerDrivenUI() {
-//        val intent = this.newServerDrivenIntent<AppBeagleActivity>(ScreenRequest("/uiController/home"))
-//        startActivity(intent)
-//        finish()
-
-        server_driven_container.loadView(this, ScreenRequest("/uiController/home"), object : OnServerStateChanged {
-            override fun invoke(serverState: ServerDrivenState) {
-                Log.d("dLog", serverState.toString())
-            }
-        })
-
-//        server_driven_container.renderScreen(
-//            activity = this,
-//            screenJson = "{\n" +
-//                    "  \"_beagleComponent_\": \"beagle:screenComponent\",\n" +
-//                    "  \"identifier\": null,\n" +
-//                    "  \"safeArea\": null,\n" +
-//                    "  \"navigationBar\": null,\n" +
-//                    "  \"child\": {\n" +
-//                    "    \"_beagleComponent_\": \"beagle:button\",\n" +
-//                    "    \"text\": \"Click me!\",\n" +
-//                    "    \"styleId\": null,\n" +
-//                    "    \"onPress\": [\n" +
-//                    "      {\n" +
-//                    "        \"_beagleAction_\": \"beagle:openNativeRoute\",\n" +
-//                    "        \"route\": \"notification\",\n" +
-//                    "        \"shouldResetApplication\": false\n" +
-//                    "      }\n" +
-//                    "    ],\n" +
-//                    "    \"clickAnalyticsEvent\": null,\n" +
-//                    "    \"enabled\": null,\n" +
-//                    "    \"id\": null,\n" +
-//                    "    \"style\": null,\n" +
-//                    "    \"accessibility\": null\n" +
-//                    "  },\n" +
-//                    "  \"style\": null,\n" +
-//                    "  \"screenAnalyticsEvent\": null,\n" +
-//                    "  \"context\": null\n" +
-//                    "}"
-//        )
+        val intent = this.newServerDrivenIntent<AppBeagleActivity>(ScreenRequest("/uiController/home"))
+        startActivity(intent)
+        finish()
     }
 
     override fun onBackPressed() {
@@ -85,4 +64,39 @@ class HomeActivity : AppCompatActivity() {
             backPressedOnce = false
         }, 2000)
     }
+
+    private fun testPageView() = PageView(
+        context = ContextData(
+            id = "pages",
+            value = listOf(
+                "Page 1",
+                "Page 2",
+                "Page 3"
+            )
+        ),
+        pageIndicator = PageIndicator(
+            selectedColor = "#000000",
+            unselectedColor = "#888888"
+        ),
+        children = listOf(
+            Text(text = expressionOf("@{pages[0]}"), alignment = valueOf(TextAlignment.CENTER)).applyFlex(
+                Flex(
+                    alignSelf = AlignSelf.CENTER,
+                    grow = 1.0
+                )
+            ),
+            Text(text = expressionOf("@{pages[1]}"), alignment = valueOf(TextAlignment.CENTER)).applyFlex(
+                Flex(
+                    alignSelf = AlignSelf.CENTER,
+                    grow = 1.0
+                )
+            ),
+            Text(text = expressionOf("@{pages[2]}"), alignment = valueOf(TextAlignment.CENTER)).applyFlex(
+                Flex(
+                    alignSelf = AlignSelf.CENTER,
+                    grow = 1.0
+                )
+            )
+        )
+    )
 }
