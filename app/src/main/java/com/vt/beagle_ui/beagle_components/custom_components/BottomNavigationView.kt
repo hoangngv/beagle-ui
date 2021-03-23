@@ -2,6 +2,8 @@ package com.vt.beagle_ui.beagle_components.custom_components
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.Menu
@@ -11,17 +13,14 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
-import br.com.zup.beagle.android.utils.newServerDrivenIntent
-import br.com.zup.beagle.android.view.ScreenRequest
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.vt.beagle_ui.R
-import com.vt.beagle_ui.ui.AppBeagleActivity
 import kotlinx.android.synthetic.main.layout_bottom_navigation_view.view.*
 import java.util.*
+
 
 class BottomNavigationView(context: Context) : LinearLayout(context) {
 
@@ -44,6 +43,7 @@ class BottomNavigationView(context: Context) : LinearLayout(context) {
                         resource: Drawable,
                         @Nullable transition: Transition<in Drawable?>?
                     ) {
+                        Log.d("dLog", menuItems[0][0])
                         menu.findItem(R.id.default_page).apply {
                             icon = resource
                             setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
