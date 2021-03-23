@@ -34,34 +34,52 @@ class BottomNavigationView(context: Context) : LinearLayout(context) {
     fun setupMenu(menuItems: ArrayList<Array<String>>) {
         if (menuItems.size > 0) {
             val menu = navigationBar.menu
-            menu.clear()
-            var count = 1
-            for (item in menuItems) {
-                Log.d("dLog", count.toString())
+            var currentTab = ""
+
+            Glide
+                .with(this)
+                .load(menuItems[0][0])
+                .into(object : SimpleTarget<Drawable?>() {
+                    override fun onResourceReady(
+                        resource: Drawable,
+                        @Nullable transition: Transition<in Drawable?>?
+                    ) {
+                        menu.findItem(R.id.default_page).apply {
+                            icon = resource
+                            setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+                            title = menuItems[0][1]
+                            currentTab = title.toString()
+                        }
+                    }
+                })
+
+            for (i in 1 until menuItems.size) {
                 Glide
                     .with(this)
-                    .load(item[0])
+                    .load(menuItems[i][0])
                     .into(object : SimpleTarget<Drawable?>() {
                         override fun onResourceReady(
                             resource: Drawable,
                             @Nullable transition: Transition<in Drawable?>?
                         ) {
-                            menu.add(Menu.NONE, count, count, item[1]).apply {
-                                id = count
+                            menu.add(Menu.NONE, i, Menu.NONE, menuItems[i][1]).apply {
                                 icon = resource
                                 setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
                             }
                         }
                     })
-                count++
             }
 
             navigationBar.setOnNavigationItemSelectedListener { item ->
                 Toast.makeText(context, item.title, Toast.LENGTH_SHORT).show()
-                for (menuItem in menuItems) {
-                    if (menuItem[1] == item.title) {
-                        val intent = context.newServerDrivenIntent<AppBeagleActivity>(ScreenRequest(menuItem[2]))
-                        startActivity(context, intent, null)
+                if (item.title != currentTab) {
+                    for (menuItem in menuItems) {
+                        if (menuItem[1] == item.title) {
+                            currentTab = item.title.toString()
+
+//                            val intent = context.newServerDrivenIntent<AppBeagleActivity>(ScreenRequest(menuItem[2]))
+//                            startActivity(context, intent, null)
+                        }
                     }
                 }
                 true
