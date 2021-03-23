@@ -5,9 +5,11 @@ import android.graphics.Color
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.vt.beagle_ui.R
 import kotlinx.android.synthetic.main.item_row_divider.view.*
+
 
 class ItemRowDivider constructor(
     context: Context,
@@ -28,6 +30,12 @@ class ItemRowDivider constructor(
     fun setHeight(height: Int) {
         val params: ViewGroup.LayoutParams = divider.layoutParams
         params.height = height
+        divider.layoutParams = params
+    }
+
+    fun setMargin(top: Int, bottom: Int, left: Int, right: Int) {
+        val params: LinearLayout.LayoutParams = divider.layoutParams as LinearLayout.LayoutParams
+        params.setMargins(left, top, right, bottom)
         divider.layoutParams = params
     }
 }

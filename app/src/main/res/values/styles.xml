@@ -80,6 +80,13 @@
         <item name="android:background">@color/colorGreen</item>
     </style>
 
+    <style name="DesignSystem.ButtonWithIcon" parent="DesignSystem.Button.Default">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:background">@color/colorGreen</item>
+    </style>
+
     <style name="DesignSystem.Button.RightArrow" parent="Widget.AppCompat.Button.Borderless">
         <item name="android:textColor">@color/colorTextMain</item>
         <item name="android:textSize">@dimen/size_text_normal</item>
@@ -92,9 +99,10 @@
     <style name="DesignSystem.TabView.Default" parent="Widget.Design.TabLayout">
         <item name="tabSelectedTextColor">@color/colorWhite</item>
         <item name="tabTextColor">@color/colorBlack</item>
-        <item name="tabBackground">@color/colorPrimaryDark</item>
+        <item name="tabBackground">@color/colorGreen</item>
         <item name="tabIndicatorColor">@color/colorWhite</item>
         <item name="tabIconTint">@color/selector_icon_color</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
     </style>
 
     <style name="BigBoldTextWhite">
@@ -106,6 +114,15 @@
     <style name="NormalText">
         <item name="android:textSize">@dimen/size_text_normal</item>
         <item name="android:textColor">@color/colorTextMain</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="BottomNavigationText">
+        <item name="android:textSize">@dimen/size_text_small</item>
+        <item name="android:textColor">@color/colorTextMain</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
     </style>
 
 </resources>

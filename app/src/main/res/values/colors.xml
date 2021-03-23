@@ -10,7 +10,11 @@
     <color name="colorIti">#2D3748</color>
     <color name="colorDarkBlue">#272E39</color>
 
+    <color name="colorPrimaryBlue">#3596EC</color>
+    <color name="colorGrayDark">#788793</color>
+
     <color name="colorGreen">#0F8E70</color>
     <color name="colorTextMain">#353739</color>
     <color name="colorDivider">#B9B9B9</color>
+    <color name="colorWhiteMilk">#F5F5F5</color>
 </resources>

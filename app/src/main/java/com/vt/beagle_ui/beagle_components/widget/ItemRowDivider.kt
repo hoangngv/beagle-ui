@@ -11,7 +11,11 @@ import com.vt.beagle_ui.beagle_components.custom_components.ItemRowDivider
 @RegisterWidget
 class ItemRowDivider(
     private val dividerColor: Bind<String>,
-    private val dividerHeight: Bind<Int>
+    private val dividerHeight: Bind<Int>,
+    private val leftMargin: Int? = null,
+    private val topMargin: Int? = null,
+    private val rightMargin: Int? = null,
+    private val bottomMargin: Int? = null,
 ): WidgetView() {
     override fun buildView(rootView: RootView): View {
         return ItemRowDivider(rootView.getContext()).apply {
@@ -25,6 +29,16 @@ class ItemRowDivider(
                 it?.let {
                     height = it
                 }
+            }
+
+            observeBindChanges(rootView, this, dividerColor) {
+                it?.let {
+                    setColor(it)
+                }
+            }
+
+            if (leftMargin != null && topMargin != null && rightMargin != null && bottomMargin != null) {
+                setMargin(topMargin, bottomMargin, leftMargin, rightMargin)
             }
         }
     }
