@@ -2,8 +2,6 @@ package com.vt.beagle_ui.beagle_components.custom_components
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.Menu
@@ -12,15 +10,17 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.Nullable
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.vt.beagle_ui.R
+import com.vt.beagle_ui.ui.home.HomeFragment
 import kotlinx.android.synthetic.main.layout_bottom_navigation_view.view.*
 import java.util.*
-
 
 class BottomNavigationView(context: Context) : LinearLayout(context) {
 
@@ -30,7 +30,7 @@ class BottomNavigationView(context: Context) : LinearLayout(context) {
         requestLayout()
     }
 
-    fun setupMenu(menuItems: ArrayList<Array<String>>) {
+    fun setupMenu(menuItems: ArrayList<Array<String>>, activity: AppCompatActivity) {
         if (menuItems.size > 0) {
             val menu = navigationBar.menu
             var currentTab = ""
@@ -70,13 +70,38 @@ class BottomNavigationView(context: Context) : LinearLayout(context) {
                     })
             }
 
+            setNavigationTextColor(navigationBar)
+
+            // init fragments
+            val fragmentManager: FragmentManager = activity.supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            var homeFragmentInstance : HomeFragment
+            var tempFragment = HomeFragment()
+
+            for (i in 0 until menuItems.size) {
+                homeFragmentInstance = HomeFragment.newInstance(menuItems[i][2]) // pass the destination
+                fragmentTransaction.add(R.id.fragment_container, homeFragmentInstance, menuItems[i][1]) // use title to diff fragment instances
+                if (i == 0) {
+                    fragmentTransaction.show(homeFragmentInstance)
+                    tempFragment = homeFragmentInstance
+                } else {
+                    fragmentTransaction.hide(homeFragmentInstance)
+                }
+            }
+            fragmentTransaction.commit()
+
             navigationBar.setOnNavigationItemSelectedListener { item ->
-                Toast.makeText(context, item.title, Toast.LENGTH_SHORT).show()
                 if (item.title != currentTab) {
                     for (menuItem in menuItems) {
                         if (menuItem[1] == item.title) {
+                            val fragmentTrans = fragmentManager.beginTransaction()
                             currentTab = item.title.toString()
-
+                            fragmentTrans.hide(tempFragment)
+                            val shownFragment = fragmentManager.findFragmentByTag(currentTab) as HomeFragment
+                            fragmentTrans.show(shownFragment)
+                            tempFragment = shownFragment
+                            fragmentTrans.commit()
+                            //context.startActivity(Intent("notification"))
 //                            val intent = context.newServerDrivenIntent<AppBeagleActivity>(ScreenRequest(menuItem[2]))
 //                            startActivity(context, intent, null)
                         }
@@ -85,7 +110,6 @@ class BottomNavigationView(context: Context) : LinearLayout(context) {
                 true
             }
 
-            setNavigationTextColor(navigationBar)
         } else {
             Log.d("dLog", "MenuItems size is zero or null")
         }

@@ -16,6 +16,7 @@
         android:layout_height="@dimen/_60sdp"
         android:background="@color/colorWhiteMilk"
         android:foreground="?attr/selectableItemBackground"
+        app:elevation="@dimen/_8sdp"
         app:itemTextColor="@color/bottom_navigation_view_item_selection"
         app:labelVisibilityMode="labeled"
         app:itemIconTint="@color/bottom_navigation_view_item_selection"

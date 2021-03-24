@@ -1,4 +1,4 @@
-package com.vt.beagle_ui.ui
+package com.vt.beagle_ui.ui.home
 
 import android.os.Bundle
 import android.os.Handler
@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import br.com.zup.beagle.android.components.Text
 import br.com.zup.beagle.android.components.page.PageIndicator
 import br.com.zup.beagle.android.components.page.PageView
@@ -31,6 +32,7 @@ class HomeActivity : AppCompatActivity() {
 
     private var backPressedOnce = false
     private var fragmentTemp: Fragment? = null
+    private var fragmentManager: FragmentManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,16 +41,10 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun renderDeclarativeUI() {
-        server_driven_container.addView(testPageView().toView(this))
+        fragment_container.addView(testPageView().toView(this))
     }
 
     private fun renderServerDrivenUI() {
-        banner.loadView(this, ScreenRequest("/uiController/banner"), object : OnServerStateChanged {
-            override fun invoke(serverState: ServerDrivenState) {
-                Log.d("dLog", serverState.toString())
-            }
-        })
-
         bottomNavigationView.loadView(
             this,
             ScreenRequest("/uiController/bottomNavigationView"),
@@ -57,10 +53,6 @@ class HomeActivity : AppCompatActivity() {
                     Log.d("dLog", serverState.toString())
                 }
             })
-
-//        val intent = this.newServerDrivenIntent<AppBeagleActivity>(ScreenRequest("/uiController/home"))
-//        startActivity(intent)
-//        finish()
     }
 
     override fun onBackPressed() {
@@ -122,51 +114,4 @@ class HomeActivity : AppCompatActivity() {
             )
         )
     )
-
-    private fun initFragment() {
-//        fragmentManager = supportFragmentManager
-//        fragmentTransaction = fragmentManager.beginTransaction()
-//        homeTaskFragment = HomeTaskFragment()
-//        homeRequestFragment = HomeRequestFragment()
-//        homePageNewFragment = HomePageNewFragment()
-////        homeNotificationFragment = new HomeNotificationFragment();
-//        //        homeNotificationFragment = new HomeNotificationFragment();
-//        homeTeamManageFragment = HomeTeamManageFragment()
-////        homeChatFragment = new HomeChatFragment();
-//
-//        //        homeChatFragment = new HomeChatFragment();
-//        fragmentTransaction.add(R.id.frame_home, homeTaskFragment)
-////        fragmentTransaction.add(R.id.frame_home, homeTaskNewFragment);
-//        //        fragmentTransaction.add(R.id.frame_home, homeTaskNewFragment);
-//        fragmentTransaction.add(R.id.frame_home, homeRequestFragment)
-//        fragmentTransaction.add(R.id.frame_home, homePageNewFragment)
-//        fragmentTransaction.add(R.id.frame_home, homeTeamManageFragment)
-////        fragmentTransaction.add(R.id.frame_home, homeNotificationFragment);
-////        fragmentTransaction.add(R.id.frame_home, homeChatFragment);
-//
-//        //        fragmentTransaction.add(R.id.frame_home, homeNotificationFragment);
-////        fragmentTransaction.add(R.id.frame_home, homeChatFragment);
-//        fragmentTransaction.show(homePageNewFragment)
-//        fragmentTransaction.hide(homeTaskFragment)
-//        //fragmentTransaction.hide(homeTaskNewFragment);
-//        //fragmentTransaction.hide(homeTaskNewFragment);
-//        fragmentTransaction.hide(homeRequestFragment)
-////        fragmentTransaction.hide(homeNotificationFragment);
-//        //        fragmentTransaction.hide(homeNotificationFragment);
-//        fragmentTransaction.hide(homeTeamManageFragment)
-////        fragmentTransaction.hide(homeChatFragment);
-//        //        fragmentTransaction.hide(homeChatFragment);
-//        fragmentTemp = homePageNewFragment
-//
-//        fragmentTransaction.commit()
-    }
-
-    private fun showFragment(hide: Fragment?, show: Fragment) {
-        val fragmentManager = supportFragmentManager
-        val transaction = fragmentManager.beginTransaction()
-        transaction.hide(hide!!)
-        transaction.show(show)
-        fragmentTemp = show
-        transaction.commit()
-    }
 }
