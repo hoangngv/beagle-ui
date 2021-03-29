@@ -118,6 +118,13 @@
         <item name="android:ellipsize">end</item>
     </style>
 
+    <style name="WhiteNormalText">
+        <item name="android:textSize">@dimen/size_text_normal</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
     <style name="HintText" parent="Widget.AppCompat.EditText">
         <item name="android:textSize">@dimen/size_text_normal</item>
         <item name="android:textColor">@color/colorTextMain</item>

@@ -9,6 +9,7 @@ class AppDesignSystem: DesignSystem() {
     override fun textStyle(id: String): Int? {
         return when(id) {
             "NormalText" -> R.style.NormalText
+            "WhiteNormalText" -> R.style.WhiteNormalText
             "BottomNavigationText" -> R.style.BottomNavigationText
             "TextStyle" -> R.style.TextStyle
             "TextAccessProfile" -> R.style.TextAccessProfile

@@ -76,8 +76,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        changeStatusBarColor(ContextCompat.getColor(this, R.color.colorGreen))
-
         if (backPressedOnce) {
             super.onBackPressed()
             return
