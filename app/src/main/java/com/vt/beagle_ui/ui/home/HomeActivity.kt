@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -51,6 +52,25 @@ class HomeActivity : AppCompatActivity() {
             object : OnServerStateChanged {
                 override fun invoke(serverState: ServerDrivenState) {
                     Log.d("dLog", serverState.toString())
+                    when (serverState) {
+                        is ServerDrivenState.Started -> {
+                            layout_loading.visibility = View.VISIBLE
+                        }
+                        is ServerDrivenState.Finished -> {
+                            layout_loading.visibility = View.GONE
+                        }
+                        is ServerDrivenState.Error -> {
+                            serverState.throwable.printStackTrace()
+                        }
+                        ServerDrivenState.Canceled -> {
+                        }
+                        is ServerDrivenState.Loading -> {
+
+                        }
+                        ServerDrivenState.Success -> {
+
+                        }
+                    }
                 }
             })
     }

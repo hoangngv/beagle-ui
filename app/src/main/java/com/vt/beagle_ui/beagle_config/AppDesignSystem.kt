@@ -37,6 +37,7 @@ class AppDesignSystem: DesignSystem() {
     override fun inputTextStyle(id: String): Int? {
         return when(id) {
             "TextInput" -> R.style.TextInput
+            "HintText" -> R.style.HintText
             else -> R.style.TextInput
         }
     }
@@ -46,6 +47,7 @@ class AppDesignSystem: DesignSystem() {
             "mobile" -> R.drawable.ic_launcher_foreground
             "right-arrow" -> R.drawable.ic_right_arrow
             "ic_notification" -> R.drawable.ic_notification
+            "ic_search" -> R.drawable.ic_search
             else -> android.R.drawable.ic_menu_help
         }
     }
