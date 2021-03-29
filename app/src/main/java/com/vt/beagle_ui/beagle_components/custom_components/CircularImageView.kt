@@ -14,6 +14,6 @@ class CircularImageView(context: Context) : LinearLayout(context) {
     }
 
     fun setImageView(remoteUrl: String) {
-        imageView.loadGlide(url = remoteUrl, isCircleCrop = true, isCached = true)
+        imageView.loadGlide(url = remoteUrl, isCircleCrop = true, isCached = false)
     }
 }
