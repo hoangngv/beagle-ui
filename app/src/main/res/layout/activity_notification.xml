@@ -8,7 +8,6 @@
 
     <FrameLayout
         android:id="@+id/frame_layout_server_driven"
-        android:paddingTop="@dimen/_20sdp"
         android:background="@drawable/bg_main_home"
         android:orientation="vertical"
         android:layout_width="match_parent"
