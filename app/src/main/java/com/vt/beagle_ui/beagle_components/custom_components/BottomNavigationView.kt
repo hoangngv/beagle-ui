@@ -2,6 +2,7 @@ package com.vt.beagle_ui.beagle_components.custom_components
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.Menu
@@ -30,7 +31,12 @@ class BottomNavigationView(context: Context) : LinearLayout(context) {
         requestLayout()
     }
 
-    fun setupMenu(menuItems: ArrayList<Array<String>>, activity: AppCompatActivity) {
+    fun setupMenu(
+        menuItems: ArrayList<Array<String>>,
+        selectedColor: String? = "#3596EC",
+        unselectedColor: String? = "#788793",
+        activity: AppCompatActivity
+    ) {
         if (menuItems.size > 0) {
             val menu = navigationBar.menu
             var currentTab = ""
@@ -43,7 +49,6 @@ class BottomNavigationView(context: Context) : LinearLayout(context) {
                         resource: Drawable,
                         @Nullable transition: Transition<in Drawable?>?
                     ) {
-                        Log.d("dLog", menuItems[0][0])
                         menu.findItem(R.id.default_page).apply {
                             icon = resource
                             setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
@@ -70,7 +75,7 @@ class BottomNavigationView(context: Context) : LinearLayout(context) {
                     })
             }
 
-            setNavigationTextColor(navigationBar)
+            setNavigationTextColor(navigationBar, selectedColor, unselectedColor)
 
             // init fragments
             val fragmentManager: FragmentManager = activity.supportFragmentManager
@@ -101,24 +106,24 @@ class BottomNavigationView(context: Context) : LinearLayout(context) {
                             fragmentTrans.show(shownFragment)
                             tempFragment = shownFragment
                             fragmentTrans.commit()
-                            //context.startActivity(Intent("notification"))
-//                            val intent = context.newServerDrivenIntent<AppBeagleActivity>(ScreenRequest(menuItem[2]))
-//                            startActivity(context, intent, null)
                         }
                     }
                 }
                 true
             }
-
         } else {
             Log.d("dLog", "MenuItems size is zero or null")
         }
     }
 
-    private fun setNavigationTextColor(navigationView: BottomNavigationView) {
+    private fun setNavigationTextColor(
+        navigationView: BottomNavigationView,
+        selectedColor: String? = "#3596EC",
+        unselectedColor: String? = "#788793"
+    ) {
         val colors = intArrayOf(
-            ContextCompat.getColor(context, R.color.colorGrayDark),
-            ContextCompat.getColor(context, R.color.colorPrimaryBlue)
+            Color.parseColor(unselectedColor),
+            Color.parseColor(selectedColor)
         )
         val states = arrayOf(
             intArrayOf(android.R.attr.state_enabled, -android.R.attr.state_checked),
