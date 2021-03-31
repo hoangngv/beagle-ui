@@ -48,7 +48,7 @@ class HomeActivity : AppCompatActivity() {
     private fun renderServerDrivenUI() {
         bottomNavigationView.loadView(
             this,
-            ScreenRequest("/uiController/bottomNavigationView"),
+            ScreenRequest("/widgetController/bottomNavigationView"),
             object : OnServerStateChanged {
                 override fun invoke(serverState: ServerDrivenState) {
                     Log.d("dLog", serverState.toString())
