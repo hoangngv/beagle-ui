@@ -10,6 +10,7 @@ class AppDesignSystem: DesignSystem() {
         return when(id) {
             "NormalText" -> R.style.NormalText
             "WhiteNormalText" -> R.style.WhiteNormalText
+            "NormalBoldText" -> R.style.NormalBoldText
             "BottomNavigationText" -> R.style.BottomNavigationText
             "TextStyle" -> R.style.TextStyle
             "TextAccessProfile" -> R.style.TextAccessProfile

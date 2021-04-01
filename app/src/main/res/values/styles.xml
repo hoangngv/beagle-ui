@@ -118,6 +118,14 @@
         <item name="android:ellipsize">end</item>
     </style>
 
+    <style name="NormalBoldText">
+        <item name="android:textSize">@dimen/size_text_normal</item>
+        <item name="android:textColor">@color/colorTextMain</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
     <style name="WhiteNormalText">
         <item name="android:textSize">@dimen/size_text_normal</item>
         <item name="android:textColor">@color/colorWhite</item>

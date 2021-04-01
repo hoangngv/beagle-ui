@@ -95,6 +95,7 @@ class BottomNavigationView(context: Context) : LinearLayout(context) {
             }
             fragmentTransaction.commit()
 
+            // listener
             navigationBar.setOnNavigationItemSelectedListener { item ->
                 if (item.title != currentTab) {
                     for (menuItem in menuItems) {
