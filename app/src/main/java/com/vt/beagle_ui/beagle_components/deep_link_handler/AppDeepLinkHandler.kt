@@ -5,7 +5,7 @@ import android.content.pm.PackageManager
 import br.com.zup.beagle.android.annotation.BeagleComponent
 import br.com.zup.beagle.android.navigation.DeepLinkHandler
 import br.com.zup.beagle.android.widget.RootView
-import com.vt.beagle_ui.ui.MainActivity
+import com.vt.beagle_ui.ui.home.HomeActivity
 
 @BeagleComponent
 class AppDeepLinkHandler : DeepLinkHandler {
@@ -20,7 +20,7 @@ class AppDeepLinkHandler : DeepLinkHandler {
         val resolveInfos = pm.queryIntentActivities(intent, PackageManager.GET_RESOLVED_FILTER)
         return if (resolveInfos.isEmpty()) {
             // Default activity
-            Intent(rootView.getContext(), MainActivity::class.java)
+            Intent(rootView.getContext(), HomeActivity::class.java)
         } else {
             // Default mapped intent
             Intent(path)

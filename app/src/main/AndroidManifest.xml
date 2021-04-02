@@ -21,19 +21,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.NotificationActivity">
-            <intent-filter>
-                <action android:name="notification" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".ui.MainActivity">
-            <intent-filter>
-                <action android:name="main" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
         <activity android:name=".ui.AppBeagleActivity" />
     </application>
 
