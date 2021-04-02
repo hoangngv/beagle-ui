@@ -21,7 +21,7 @@ import com.wang.avi.AVLoadingIndicatorView
 
 @RegisterAction
 data class ShowDialogAction(
-    val dialogEndpoint: String
+    val endpoint: String
 ) : Action {
     override fun execute(rootView: RootView, origin: View) {
 
@@ -32,7 +32,7 @@ data class ShowDialogAction(
 
         dialogContainer.loadView(
             rootView.getContext() as AppCompatActivity,
-            ScreenRequest(dialogEndpoint),
+            ScreenRequest(endpoint),
             object : OnServerStateChanged {
                 override fun invoke(serverState: ServerDrivenState) {
                     Log.d("dLog", serverState.toString())
