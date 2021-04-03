@@ -11,6 +11,6 @@ import com.vt.beagle_ui.base.BaseBottomSheetDialogFragment
 data class ShowBottomSheetAction(private val endpoint: String): Action {
     override fun execute(rootView: RootView, origin: View) {
         val bottomSheetFragment = BaseBottomSheetDialogFragment.newInstance(endpoint)
-        bottomSheetFragment.show((rootView.getContext() as AppCompatActivity).supportFragmentManager, bottomSheetFragment.tag)
+        bottomSheetFragment.show((rootView.getContext() as AppCompatActivity).supportFragmentManager, endpoint)
     }
 }

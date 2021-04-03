@@ -5,15 +5,15 @@ import androidx.appcompat.app.AppCompatActivity
 import br.com.zup.beagle.android.action.Action
 import br.com.zup.beagle.android.widget.RootView
 import br.com.zup.beagle.annotation.RegisterAction
+import com.vt.beagle_ui.base.BaseBottomSheetDialogFragment
 import com.vt.beagle_ui.base.BaseDialogFragment
 
 @RegisterAction
-data class ShowDialogAction(
-    val endpoint: String
-) : Action {
+data class DismissDialogAction(val endpoint: String): Action {
     override fun execute(rootView: RootView, origin: View) {
         val fragmentManager = (rootView.getContext() as AppCompatActivity).supportFragmentManager
-        val dialogFragment = BaseDialogFragment.newInstance(endpoint)
-        dialogFragment.show(fragmentManager, endpoint)
+        val dialogFragment = fragmentManager.findFragmentByTag(endpoint)
+        if (dialogFragment is BaseDialogFragment) dialogFragment.dismiss()
+        else if (dialogFragment is BaseBottomSheetDialogFragment) dialogFragment.dismiss()
     }
 }
