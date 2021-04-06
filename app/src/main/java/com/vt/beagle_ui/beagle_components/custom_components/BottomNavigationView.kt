@@ -9,26 +9,47 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.vt.beagle_ui.R
+import com.vt.beagle_ui.model.BadgeModel
 import com.vt.beagle_ui.ui.home.HomeFragment
+import com.vt.beagle_ui.utils.bus.SingleBus
+import com.vt.beagle_ui.utils.bus.SingleBusKey
 import kotlinx.android.synthetic.main.layout_bottom_navigation_view.view.*
+import kotlinx.coroutines.Job
 import java.util.*
 
 class BottomNavigationView(context: Context) : LinearLayout(context) {
 
+    private var notificationMenuItemId = 0
+    private var currentTab = ""
+    private var tempFragment = HomeFragment()
+
     init {
         View.inflate(context, R.layout.layout_bottom_navigation_view, this)
+        initBus()
         invalidate()
         requestLayout()
+    }
+
+    private fun initBus(){
+        val busJobs : MutableList<Job> = arrayListOf()
+        busJobs.apply {
+            add(SingleBus.receive(SingleBusKey.SET_BADGE_NUMBER) {
+                val badgeModel = it as BadgeModel
+                val notificationBadge = navigationBar.getOrCreateBadge(notificationMenuItemId)
+                notificationBadge.number = badgeModel.number
+                notificationBadge.backgroundColor = Color.parseColor(badgeModel.badgeBackgroundColor)
+                notificationBadge.badgeTextColor = Color.parseColor(badgeModel.badgeTextColor)
+            })
+        }
     }
 
     fun setupMenu(
@@ -38,82 +59,95 @@ class BottomNavigationView(context: Context) : LinearLayout(context) {
         activity: AppCompatActivity
     ) {
         if (menuItems.size > 0) {
-            val menu = navigationBar.menu
-            var currentTab = ""
+            val fragmentManager: FragmentManager = activity.supportFragmentManager
+            setupMenuItems(menuItems)
+            setNavigationTextColor(navigationBar, selectedColor, unselectedColor)
+            generateFragment(menuItems, fragmentManager)
+            setupListener(menuItems, fragmentManager)
+        } else {
+            Log.d("dLog", "MenuItems size is zero or null")
+        }
+    }
 
+    private fun setupMenuItems(menuItems: ArrayList<Array<String>>) {
+        val menu = navigationBar.menu
+
+        for (i in 0 until menuItems.size) {
             Glide
                 .with(this)
-                .load(menuItems[0][0])
+                .load(menuItems[i][0])
                 .into(object : SimpleTarget<Drawable?>() {
                     override fun onResourceReady(
                         resource: Drawable,
                         @Nullable transition: Transition<in Drawable?>?
                     ) {
-                        menu.findItem(R.id.default_page).apply {
-                            icon = resource
-                            setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
-                            title = menuItems[0][1]
-                            currentTab = title.toString()
-                        }
-                    }
-                })
-
-            for (i in 1 until menuItems.size) {
-                Glide
-                    .with(this)
-                    .load(menuItems[i][0])
-                    .into(object : SimpleTarget<Drawable?>() {
-                        override fun onResourceReady(
-                            resource: Drawable,
-                            @Nullable transition: Transition<in Drawable?>?
-                        ) {
-                            menu.add(Menu.NONE, i, Menu.NONE, menuItems[i][1]).apply {
+                        if (i == 0) {
+                            menu.findItem(R.id.default_page).apply {
+                                icon = resource
+                                setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+                                title = menuItems[i][1]
+                                currentTab = title.toString()
+                            }
+                        } else {
+                            val menuItemId = ViewCompat.generateViewId()
+                            menu.add(Menu.NONE, menuItemId, Menu.NONE, menuItems[i][1]).apply {
                                 icon = resource
                                 setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
                             }
-                        }
-                    })
-            }
 
-            setNavigationTextColor(navigationBar, selectedColor, unselectedColor)
-
-            // init fragments
-            val fragmentManager: FragmentManager = activity.supportFragmentManager
-            val fragmentTransaction = fragmentManager.beginTransaction()
-            var homeFragmentInstance : HomeFragment
-            var tempFragment = HomeFragment()
-
-            for (i in 0 until menuItems.size) {
-                homeFragmentInstance = HomeFragment.newInstance(menuItems[i][2]) // pass the destination
-                fragmentTransaction.add(R.id.fragment_container, homeFragmentInstance, menuItems[i][1]) // use title to diff fragment instances
-                if (i == 0) {
-                    fragmentTransaction.show(homeFragmentInstance)
-                    tempFragment = homeFragmentInstance
-                } else {
-                    fragmentTransaction.hide(homeFragmentInstance)
-                }
-            }
-            fragmentTransaction.commit()
-
-            // listener
-            navigationBar.setOnNavigationItemSelectedListener { item ->
-                if (item.title != currentTab) {
-                    for (menuItem in menuItems) {
-                        if (menuItem[1] == item.title) {
-                            val fragmentTrans = fragmentManager.beginTransaction()
-                            currentTab = item.title.toString()
-                            fragmentTrans.hide(tempFragment)
-                            val shownFragment = fragmentManager.findFragmentByTag(currentTab) as HomeFragment
-                            fragmentTrans.show(shownFragment)
-                            tempFragment = shownFragment
-                            fragmentTrans.commit()
+                            if (i == menuItems.size-1) {
+                                notificationMenuItemId = menuItemId
+                            }
                         }
                     }
-                }
-                true
+                })
+        }
+    }
+
+    private fun generateFragment(
+        menuItems: ArrayList<Array<String>>,
+        fragmentManager: FragmentManager)
+    {
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        var homeFragmentInstance : HomeFragment
+
+        for (i in 0 until menuItems.size) {
+            homeFragmentInstance = HomeFragment.newInstance(menuItems[i][2]) // pass the destination
+            fragmentTransaction.add(
+                R.id.fragment_container,
+                homeFragmentInstance,
+                menuItems[i][1]
+            ) // use title to diff fragment instances
+            if (i == 0) {
+                fragmentTransaction.show(homeFragmentInstance)
+                tempFragment = homeFragmentInstance
+            } else {
+                fragmentTransaction.hide(homeFragmentInstance)
             }
-        } else {
-            Log.d("dLog", "MenuItems size is zero or null")
+        }
+        fragmentTransaction.commit()
+    }
+
+    private fun setupListener(
+        menuItems: ArrayList<Array<String>>,
+        fragmentManager: FragmentManager)
+    {
+        // listener
+        navigationBar.setOnNavigationItemSelectedListener { item ->
+            if (item.title != currentTab) {
+                for (menuItem in menuItems) {
+                    if (menuItem[1] == item.title) {
+                        val fragmentTrans = fragmentManager.beginTransaction()
+                        currentTab = item.title.toString()
+                        fragmentTrans.hide(tempFragment)
+                        val shownFragment = fragmentManager.findFragmentByTag(currentTab) as HomeFragment
+                        fragmentTrans.show(shownFragment)
+                        tempFragment = shownFragment
+                        fragmentTrans.commit()
+                    }
+                }
+            }
+            true
         }
     }
 

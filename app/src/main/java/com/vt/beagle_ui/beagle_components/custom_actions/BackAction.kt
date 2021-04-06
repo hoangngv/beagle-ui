@@ -1,14 +1,14 @@
-package com.vt.beagle_ui.beagle_components.actions
+package com.vt.beagle_ui.beagle_components.custom_actions
 
 import android.view.View
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import br.com.zup.beagle.android.action.Action
 import br.com.zup.beagle.android.widget.RootView
 import br.com.zup.beagle.annotation.RegisterAction
 
 @RegisterAction
-data class ToastAction(val msg: String? = null) : Action {
+data class BackAction(val message : String) : Action {
     override fun execute(rootView: RootView, origin: View) {
-        Toast.makeText(rootView.getContext(), msg, Toast.LENGTH_SHORT).show()
+        (rootView.getContext() as AppCompatActivity).finish()
     }
 }

@@ -1,14 +1,11 @@
 package com.vt.beagle_ui.ui.home
 
-import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import br.com.zup.beagle.android.components.Text
@@ -27,15 +24,12 @@ import br.com.zup.beagle.widget.core.AlignSelf
 import br.com.zup.beagle.widget.core.Flex
 import br.com.zup.beagle.widget.core.TextAlignment
 import com.vt.beagle_ui.R
-import com.vt.beagle_ui.extensions.changeStatusBarColor
 import com.vt.beagle_ui.extensions.toast
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
 
     private var backPressedOnce = false
-    private var fragmentTemp: Fragment? = null
-    private var fragmentManager: FragmentManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

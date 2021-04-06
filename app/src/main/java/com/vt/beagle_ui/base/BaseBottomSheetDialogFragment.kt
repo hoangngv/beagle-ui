@@ -19,7 +19,7 @@ class BaseBottomSheetDialogFragment: BottomSheetDialogFragment() {
     private var destinationUrl: String = ""
 
     companion object {
-        fun newInstance(destinationUrl : String) : BaseBottomSheetDialogFragment {
+        fun newInstance(destinationUrl: String) : BaseBottomSheetDialogFragment {
             val bundle = bundleOf("destination" to destinationUrl)
             return BaseBottomSheetDialogFragment().apply {
                 arguments = bundle
@@ -32,6 +32,7 @@ class BaseBottomSheetDialogFragment: BottomSheetDialogFragment() {
         arguments?.let {
             destinationUrl = it.getString("destination").toString()
         }
+        setStyle(STYLE_NORMAL, R.style.TransparentBottomSheetStyle);
     }
 
     override fun onCreateView(

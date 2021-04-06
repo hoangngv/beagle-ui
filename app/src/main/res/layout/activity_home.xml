@@ -6,24 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.home.HomeActivity">
 
-<!--    <FrameLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent">-->
-
-<!--        <FrameLayout-->
-<!--            android:id="@+id/server_driven_container"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent" />-->
-
-<!--        <ProgressBar-->
-<!--            android:id="@+id/progress_bar"-->
-<!--            android:layout_width="42dp"-->
-<!--            android:layout_height="42dp"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:visibility="gone"/>-->
-
-<!--    </FrameLayout>-->
-
     <FrameLayout
         android:layout_alignParentTop="true"
         android:layout_above="@+id/bottomNavigationView"

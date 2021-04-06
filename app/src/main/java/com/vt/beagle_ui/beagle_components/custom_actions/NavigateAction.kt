@@ -1,4 +1,4 @@
-package com.vt.beagle_ui.beagle_components.actions
+package com.vt.beagle_ui.beagle_components.custom_actions
 
 import android.view.View
 import androidx.core.content.ContextCompat.startActivity
