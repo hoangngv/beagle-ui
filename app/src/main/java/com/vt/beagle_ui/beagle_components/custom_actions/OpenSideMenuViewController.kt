@@ -6,14 +6,16 @@ import androidx.drawerlayout.widget.DrawerLayout
 import br.com.zup.beagle.android.action.Action
 import br.com.zup.beagle.android.widget.RootView
 import br.com.zup.beagle.annotation.RegisterAction
+import com.vt.beagle_ui.R
 import com.vt.beagle_ui.base.BaseDialogFragment
 import com.vt.beagle_ui.base.BaseNavigationDrawerFragment
+import kotlinx.android.synthetic.main.activity_home.*
 
 @RegisterAction
 data class OpenSideMenuViewController(val url: String) : Action {
     override fun execute(rootView: RootView, origin: View) {
         val fragmentManager = (rootView.getContext() as AppCompatActivity).supportFragmentManager
         val drawerFragment = BaseNavigationDrawerFragment.newInstance(url)
-        fragmentManager.beginTransaction().add(drawerFragment, url).show(drawerFragment).commit()
+        fragmentManager.beginTransaction().add(R.id.fragment_container, drawerFragment, url).show(drawerFragment).commit()
     }
 }

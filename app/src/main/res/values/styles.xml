@@ -52,9 +52,9 @@
 
 
     <style name="TextInput" parent="Widget.AppCompat.EditText">
-        <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">20sp</item>
-        <item name="android:textColorHint">@color/colorBlack</item>
+        <item name="android:textColor">@color/colorTextMain</item>
+        <item name="android:textSize">@dimen/size_text_normal</item>
+        <item name="android:textColorHint">@color/colorTextMain</item>
     </style>
 
     <style name="DesignSystem.Toolbar.Center" parent="Widget.AppCompat.Toolbar">
