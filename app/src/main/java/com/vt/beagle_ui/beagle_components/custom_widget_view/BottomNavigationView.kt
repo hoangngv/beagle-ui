@@ -1,4 +1,4 @@
-package com.vt.beagle_ui.beagle_components.custom_components
+package com.vt.beagle_ui.beagle_components.custom_widget_view
 
 import android.content.Context
 import android.content.res.ColorStateList

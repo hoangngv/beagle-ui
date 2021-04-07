@@ -9,7 +9,8 @@ import com.vt.beagle_ui.base.BaseDialogFragment
 
 @RegisterAction
 data class ShowDialogAction(
-    val endpoint: String
+    val endpoint: String,
+    val numberOfItems: Int?
 ) : Action {
     override fun execute(rootView: RootView, origin: View) {
         val fragmentManager = (rootView.getContext() as AppCompatActivity).supportFragmentManager

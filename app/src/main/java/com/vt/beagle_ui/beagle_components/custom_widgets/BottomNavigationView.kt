@@ -1,11 +1,11 @@
-package com.vt.beagle_ui.beagle_components.widget
+package com.vt.beagle_ui.beagle_components.custom_widgets
 
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import br.com.zup.beagle.android.widget.RootView
 import br.com.zup.beagle.android.widget.WidgetView
 import br.com.zup.beagle.annotation.RegisterWidget
-import com.vt.beagle_ui.beagle_components.custom_components.BottomNavigationView
+import com.vt.beagle_ui.beagle_components.custom_widget_view.BottomNavigationView
 
 @RegisterWidget
 class BottomNavigationView(

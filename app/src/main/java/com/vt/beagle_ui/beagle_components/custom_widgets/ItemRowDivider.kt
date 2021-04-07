@@ -1,4 +1,4 @@
-package com.vt.beagle_ui.beagle_components.widget
+package com.vt.beagle_ui.beagle_components.custom_widgets
 
 import android.view.View
 import br.com.zup.beagle.android.context.Bind
@@ -6,7 +6,7 @@ import br.com.zup.beagle.android.utils.observeBindChanges
 import br.com.zup.beagle.android.widget.RootView
 import br.com.zup.beagle.android.widget.WidgetView
 import br.com.zup.beagle.annotation.RegisterWidget
-import com.vt.beagle_ui.beagle_components.custom_components.ItemRowDivider
+import com.vt.beagle_ui.beagle_components.custom_widget_view.ItemRowDivider
 
 @RegisterWidget
 class ItemRowDivider(

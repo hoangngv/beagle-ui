@@ -8,7 +8,10 @@ import br.com.zup.beagle.annotation.RegisterAction
 import com.vt.beagle_ui.base.BaseBottomSheetDialogFragment
 
 @RegisterAction
-data class ShowBottomSheetAction(private val endpoint: String): Action {
+data class ShowBottomSheetAction(
+    private val endpoint: String,
+    private val numberOfItems: Int?
+): Action {
     override fun execute(rootView: RootView, origin: View) {
         val bottomSheetFragment = BaseBottomSheetDialogFragment.newInstance(endpoint)
         bottomSheetFragment.show((rootView.getContext() as AppCompatActivity).supportFragmentManager, endpoint)
